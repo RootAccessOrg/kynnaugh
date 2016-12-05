@@ -11,7 +11,7 @@ using anyId = System.UInt16;
 
 namespace kynnaugh
 {
-    public class Plugin
+    public static class Plugin
     {
         // based on / a port of https://github.com/allquixotic/kynnaugh-cc/blob/master/kynnaugh.cpp
         const string PluginName = "kynnaugh";
@@ -20,7 +20,7 @@ namespace kynnaugh
         const string PluginAuthor = "RootAccessOrg";
         const string PluginDescription = "Speech recognition and text to speech for deaf users.";
 
-        string PluginId;
+        static string PluginId;
 
         /*********************************** Required functions ************************************/
         /*
@@ -32,7 +32,7 @@ namespace kynnaugh
         /// </summary>
         /// <returns></returns>
         [DllExport]
-        IntPtr ts3plugin_name()
+        public static IntPtr ts3plugin_name()
         {
             return StringUtils.NativeUtf8FromString(PluginName);
         }
@@ -42,7 +42,7 @@ namespace kynnaugh
         /// </summary>
         /// <returns></returns>
         [DllExport]
-        IntPtr ts3plugin_version()
+        public static IntPtr ts3plugin_version()
         {
             return StringUtils.NativeUtf8FromString(PluginVersion);
         }
@@ -52,7 +52,7 @@ namespace kynnaugh
         /// </summary>
         /// <returns></returns>
         [DllExport]
-        int ts3plugin_apiVersion()
+        public static int ts3plugin_apiVersion()
         {
             return PluginApiVersion;
         }
@@ -62,7 +62,7 @@ namespace kynnaugh
         /// </summary>
         /// <returns></returns>
         [DllExport]
-        IntPtr ts3plugin_author()
+        public static IntPtr ts3plugin_author()
         {
             return StringUtils.NativeUtf8FromString(PluginAuthor);
         }
@@ -72,7 +72,7 @@ namespace kynnaugh
         /// </summary>
         /// <returns></returns>
         [DllExport]
-        IntPtr ts3plugin_description()
+        public static IntPtr ts3plugin_description()
         {
             return StringUtils.NativeUtf8FromString(PluginDescription);
         }
@@ -82,7 +82,7 @@ namespace kynnaugh
         /// </summary>
         /// <param name="funcs"></param>
         [DllExport]
-        void ts3plugin_setFunctionPointers(TS3Functions funcs)
+        public static void ts3plugin_setFunctionPointers(TS3Functions funcs)
         {
             //ts3Functions = funcs;
         }
@@ -93,9 +93,10 @@ namespace kynnaugh
         /// </summary>
         /// <returns></returns>
         [DllExport]
-        int ts3plugin_init()
+        public static int ts3plugin_init()
         {
-            Console.WriteLine("Kynnaugh plugin_init()");
+            //Console.WriteLine("Kynnaugh plugin_init()");
+            System.Diagnostics.Debug.WriteLine("Kynnaugh plugin_init()");
             return 0;
         }
 
@@ -103,7 +104,7 @@ namespace kynnaugh
         /// Custom code called right before the plugin is unloaded
         /// </summary>
         [DllExport]
-        void ts3plugin_shutdown()
+        public static void ts3plugin_shutdown()
         {
 
         }
@@ -115,10 +116,10 @@ namespace kynnaugh
         /// </summary>
         /// <param name="id"></param>
         [DllExport]
-        void ts3plugin_registerPluginID(IntPtr id)
+        public static void ts3plugin_registerPluginID(IntPtr id)
         {
             PluginId = StringUtils.StringFromNativeUtf8(id);
-            Console.WriteLine("registerPluginId() " + PluginId);
+            //Console.WriteLine("registerPluginId() " + PluginId);
         }
 
         /// <summary>
@@ -126,7 +127,7 @@ namespace kynnaugh
         /// </summary>
         /// <param name="data"></param>
         [DllExport]
-        void ts3plugin_freeMemory(IntPtr data)
+        public static void ts3plugin_freeMemory(IntPtr data)
         {
             Marshal.FreeHGlobal(data);
         }
@@ -139,7 +140,7 @@ namespace kynnaugh
         /// </summary>
         /// <returns></returns>
         [DllExport]
-        int ts3plugin_requestAutoload()
+        public static int ts3plugin_requestAutoload()
         {
             return 1;  /* 1 = request autoloaded, 0 = do not request autoload */
         }
@@ -153,7 +154,7 @@ namespace kynnaugh
         /// <param name="sampleCount"></param>
         /// <param name="channels"></param>
         [DllExport]
-        void ts3plugin_onEditPlaybackVoiceDataEvent(UInt64 serverConnectionHandlerID, anyId clientID, IntPtr samples,
+        public static void ts3plugin_onEditPlaybackVoiceDataEvent(UInt64 serverConnectionHandlerID, anyId clientID, IntPtr samples,
                                                         int sampleCount, int channels)
         {
             short[] managedSamples = new short[sampleCount];
