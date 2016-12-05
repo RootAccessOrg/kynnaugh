@@ -16,7 +16,7 @@ namespace kynnaugh
         // based on / a port of https://github.com/allquixotic/kynnaugh-cc/blob/master/kynnaugh.cpp
         const string PluginName = "kynnaugh";
         const string PluginVersion = "1.0";
-        const int PluginApiVersion = 20;
+        const int PluginApiVersion = 21;
         const string PluginAuthor = "RootAccessOrg";
         const string PluginDescription = "Speech recognition and text to speech for deaf users.";
 
