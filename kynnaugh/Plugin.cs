@@ -156,6 +156,8 @@ namespace kynnaugh
         void ts3plugin_onEditPlaybackVoiceDataEvent(UInt64 serverConnectionHandlerID, anyId clientID, IntPtr samples,
                                                         int sampleCount, int channels)
         {
+            short[] managedSamples = new short[sampleCount];
+            Marshal.Copy(samples, managedSamples, 0, sampleCount);
         }
     }
 }
