@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
+using anyId = System.UInt16;
+
 namespace kynnaugh
 {
     public class Plugin
@@ -103,7 +105,7 @@ namespace kynnaugh
         [DllExport]
         void ts3plugin_shutdown()
         {
-            
+
         }
 
         /// <summary>
@@ -128,7 +130,7 @@ namespace kynnaugh
         {
             Marshal.FreeHGlobal(data);
         }
-        
+
 
         /// <summary>
         /// Plugin requests to be always automatically loaded by the TeamSpeak 3 client unless
@@ -142,5 +144,18 @@ namespace kynnaugh
             return 1;  /* 1 = request autoloaded, 0 = do not request autoload */
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serverConnectionHandlerID"></param>
+        /// <param name="clientID"></param>
+        /// <param name="samples">short*</param>
+        /// <param name="sampleCount"></param>
+        /// <param name="channels"></param>
+        [DllExport]
+        void ts3plugin_onEditPlaybackVoiceDataEvent(UInt64 serverConnectionHandlerID, anyId clientID, IntPtr samples,
+                                                        int sampleCount, int channels)
+        {
+        }
     }
 }
