@@ -85,8 +85,10 @@ namespace kynnaugh
         [DllExport]
         public static void ts3plugin_setFunctionPointers(TS3Functions funcs)
         {
-            //Console.WriteLine("Kynnaugh setFunctionPointers()");
-            //ts3Functions = funcs;
+            Console.WriteLine("Kynnaugh setFunctionPointers()");
+            ts3Functions = funcs;
+            // TODO: fix printMessageToCurrentTab function. currently ANSI, not UTF8
+            funcs.printMessageToCurrentTab("TEST");
         }
         
         /// <summary>
