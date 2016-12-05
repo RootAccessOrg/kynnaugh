@@ -16,11 +16,12 @@ namespace kynnaugh
         // based on / a port of https://github.com/allquixotic/kynnaugh-cc/blob/master/kynnaugh.cpp
         const string PluginName = "kynnaugh";
         const string PluginVersion = "1.0";
-        const int PluginApiVersion = 21;
+        const int PluginApiVersion = 20;
         const string PluginAuthor = "RootAccessOrg";
         const string PluginDescription = "Speech recognition and text to speech for deaf users.";
 
         static string PluginId;
+        static TS3Functions ts3Functions;
 
         /*********************************** Required functions ************************************/
         /*
@@ -84,9 +85,10 @@ namespace kynnaugh
         [DllExport]
         public static void ts3plugin_setFunctionPointers(TS3Functions funcs)
         {
+            //Console.WriteLine("Kynnaugh setFunctionPointers()");
             //ts3Functions = funcs;
         }
-
+        
         /// <summary>
         /// Custom code called right after loading the plugin. Returns 0 on success, 1 on failure.
         /// If the function returns 1 on failure, the plugin will be unloaded again.
@@ -95,11 +97,10 @@ namespace kynnaugh
         [DllExport]
         public static int ts3plugin_init()
         {
-            //Console.WriteLine("Kynnaugh plugin_init()");
-            System.Diagnostics.Debug.WriteLine("Kynnaugh plugin_init()");
+            //Console.WriteLine("Kynnaugh init()");
             return 0;
         }
-
+        
         /// <summary>
         /// Custom code called right before the plugin is unloaded
         /// </summary>
@@ -108,7 +109,7 @@ namespace kynnaugh
         {
 
         }
-
+        /*
         /// <summary>
         /// If the plugin wants to use error return codes, plugin commands, hotkeys or menu items, it needs to register a command ID. This function will be
         /// automatically called after the plugin was initialized.This function is optional.If you don't use these features, this function can be omitted.
@@ -119,9 +120,9 @@ namespace kynnaugh
         public static void ts3plugin_registerPluginID(IntPtr id)
         {
             PluginId = StringUtils.StringFromNativeUtf8(id);
-            //Console.WriteLine("registerPluginId() " + PluginId);
+            Console.WriteLine("registerPluginId() " + PluginId);
         }
-
+        
         /// <summary>
         /// Required to release the memory for parameter "data" allocated in ts3plugin_infoData and ts3plugin_initMenus
         /// </summary>
@@ -142,7 +143,7 @@ namespace kynnaugh
         [DllExport]
         public static int ts3plugin_requestAutoload()
         {
-            return 1;  /* 1 = request autoloaded, 0 = do not request autoload */
+            return 1;  // 1 = request autoloaded, 0 = do not request autoload
         }
 
         /// <summary>
@@ -159,6 +160,6 @@ namespace kynnaugh
         {
             short[] managedSamples = new short[sampleCount];
             Marshal.Copy(samples, managedSamples, 0, sampleCount);
-        }
+        }*/
     }
 }
