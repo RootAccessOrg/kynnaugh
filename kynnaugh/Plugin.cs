@@ -70,5 +70,12 @@ namespace kynnaugh
         {
             return StringUtils.NativeUtf8FromString(PluginDescription);
         }
+
+
+        [DllExport]
+        void ts3plugin_setFunctionPointers(TS3Functions funcs)
+        {
+            //ts3Functions = funcs;
+        }
     }
 }
