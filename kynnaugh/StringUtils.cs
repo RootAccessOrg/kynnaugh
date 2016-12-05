@@ -13,9 +13,9 @@ namespace kynnaugh
         // http://stackoverflow.com/a/10773988
         public static IntPtr NativeUtf8FromString(string managedString)
         {
-            int len = Encoding.UTF8.GetByteCount(managedString);
+            int len = (new UTF8Encoding(false)).GetByteCount(managedString);
             byte[] buffer = new byte[len + 1];
-            Encoding.UTF8.GetBytes(managedString, 0, managedString.Length, buffer, 0);
+            (new UTF8Encoding(false)).GetBytes(managedString, 0, managedString.Length, buffer, 0);
             IntPtr nativeUtf8 = Marshal.AllocHGlobal(buffer.Length);
             Marshal.Copy(buffer, 0, nativeUtf8, buffer.Length);
             return nativeUtf8;
@@ -27,7 +27,7 @@ namespace kynnaugh
             while (Marshal.ReadByte(nativeUtf8, len) != 0) ++len;
             byte[] buffer = new byte[len];
             Marshal.Copy(nativeUtf8, buffer, 0, buffer.Length);
-            return Encoding.UTF8.GetString(buffer);
+            return (new UTF8Encoding(false)).GetString(buffer);
         }
     }
 }
