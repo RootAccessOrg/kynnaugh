@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kynnaugh", "kynnaugh\kynnaugh.csproj", "{CDD3A3B7-5782-4DCD-ABAC-6E109A7C49B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcmToFlac", "PcmToFlac\PcmToFlac.csproj", "{97AFA03D-386E-4071-A816-05BF9702807E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcmToFlac.Test", "PcmToFlac.Test\PcmToFlac.Test.csproj", "{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{CDD3A3B7-5782-4DCD-ABAC-6E109A7C49B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDD3A3B7-5782-4DCD-ABAC-6E109A7C49B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDD3A3B7-5782-4DCD-ABAC-6E109A7C49B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97AFA03D-386E-4071-A816-05BF9702807E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97AFA03D-386E-4071-A816-05BF9702807E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97AFA03D-386E-4071-A816-05BF9702807E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97AFA03D-386E-4071-A816-05BF9702807E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
