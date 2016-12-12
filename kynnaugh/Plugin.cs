@@ -32,7 +32,7 @@ namespace kynnaugh
         /// Unique name identifying this plugin
         /// </summary>
         /// <returns></returns>
-        [DllExport]
+        [DllExport(CallingConvention=CallingConvention.Cdecl)]
         public static IntPtr ts3plugin_name()
         {
             return StringUtils.NativeUtf8FromString(PluginName);
@@ -42,7 +42,7 @@ namespace kynnaugh
         /// Plugin version
         /// </summary>
         /// <returns></returns>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static IntPtr ts3plugin_version()
         {
             return StringUtils.NativeUtf8FromString(PluginVersion);
@@ -52,7 +52,7 @@ namespace kynnaugh
         /// Plugin API version. Must be the same as the clients API major version, else the plugin fails to load.
         /// </summary>
         /// <returns></returns>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static int ts3plugin_apiVersion()
         {
             return PluginApiVersion;
@@ -62,7 +62,7 @@ namespace kynnaugh
         /// Plugin author
         /// </summary>
         /// <returns></returns>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static IntPtr ts3plugin_author()
         {
             return StringUtils.NativeUtf8FromString(PluginAuthor);
@@ -72,7 +72,7 @@ namespace kynnaugh
         /// Plugin description
         /// </summary>
         /// <returns></returns>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static IntPtr ts3plugin_description()
         {
             return StringUtils.NativeUtf8FromString(PluginDescription);
@@ -82,7 +82,7 @@ namespace kynnaugh
         /// Set TeamSpeak 3 callback functions
         /// </summary>
         /// <param name="funcs"></param>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static void ts3plugin_setFunctionPointers(TS3Functions funcs)
         {
             Console.WriteLine("Kynnaugh setFunctionPointers()");
@@ -96,7 +96,7 @@ namespace kynnaugh
         /// If the function returns 1 on failure, the plugin will be unloaded again.
         /// </summary>
         /// <returns></returns>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static int ts3plugin_init()
         {
             //Console.WriteLine("Kynnaugh init()");
@@ -106,19 +106,19 @@ namespace kynnaugh
         /// <summary>
         /// Custom code called right before the plugin is unloaded
         /// </summary>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static void ts3plugin_shutdown()
         {
 
         }
-        /*
+        
         /// <summary>
         /// If the plugin wants to use error return codes, plugin commands, hotkeys or menu items, it needs to register a command ID. This function will be
         /// automatically called after the plugin was initialized.This function is optional.If you don't use these features, this function can be omitted.
         /// Note the passed pluginID parameter is no longer valid after calling this function, so you must copy it and store it in the plugin.
         /// </summary>
         /// <param name="id"></param>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static void ts3plugin_registerPluginID(IntPtr id)
         {
             PluginId = StringUtils.StringFromNativeUtf8(id);
@@ -129,7 +129,7 @@ namespace kynnaugh
         /// Required to release the memory for parameter "data" allocated in ts3plugin_infoData and ts3plugin_initMenus
         /// </summary>
         /// <param name="data"></param>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static void ts3plugin_freeMemory(IntPtr data)
         {
             Marshal.FreeHGlobal(data);
@@ -142,7 +142,7 @@ namespace kynnaugh
         /// This function is optional.If missing, no autoload is assumed.
         /// </summary>
         /// <returns></returns>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static int ts3plugin_requestAutoload()
         {
             return 1;  // 1 = request autoloaded, 0 = do not request autoload
@@ -156,12 +156,12 @@ namespace kynnaugh
         /// <param name="samples">short*</param>
         /// <param name="sampleCount"></param>
         /// <param name="channels"></param>
-        [DllExport]
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static void ts3plugin_onEditPlaybackVoiceDataEvent(UInt64 serverConnectionHandlerID, anyId clientID, IntPtr samples,
                                                         int sampleCount, int channels)
         {
             short[] managedSamples = new short[sampleCount];
             Marshal.Copy(samples, managedSamples, 0, sampleCount);
-        }*/
+        }
     }
 }
