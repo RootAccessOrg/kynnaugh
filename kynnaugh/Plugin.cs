@@ -7,8 +7,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-using anyId = System.UInt16;
-
 namespace kynnaugh
 {
     public static class Plugin
@@ -21,7 +19,8 @@ namespace kynnaugh
         const string PluginDescription = "Speech recognition and text to speech for deaf users.";
 
         static string PluginId;
-        static TS3Functions ts3Functions;
+
+        static SampleHandler Handler = null;
 
         /*********************************** Required functions ************************************/
         /*
@@ -86,9 +85,9 @@ namespace kynnaugh
         public static void ts3plugin_setFunctionPointers(TS3Functions funcs)
         {
             Console.WriteLine("Kynnaugh setFunctionPointers()");
-            ts3Functions = funcs;
+            Handler.TS3Functions = funcs;
             // TODO: fix printMessageToCurrentTab function. currently ANSI, not UTF8
-            funcs.printMessageToCurrentTab("TEST");
+            funcs.printMessageToCurrentTab("Function pointers received");
         }
         
         /// <summary>
@@ -100,6 +99,7 @@ namespace kynnaugh
         public static int ts3plugin_init()
         {
             //Console.WriteLine("Kynnaugh init()");
+            Handler = new SampleHandler();
             return 0;
         }
         
@@ -157,11 +157,15 @@ namespace kynnaugh
         /// <param name="sampleCount"></param>
         /// <param name="channels"></param>
         [DllExport(CallingConvention = CallingConvention.Cdecl)]
-        public static void ts3plugin_onEditPlaybackVoiceDataEvent(UInt64 serverConnectionHandlerID, anyId clientID, IntPtr samples,
+        public static void ts3plugin_onEditPlaybackVoiceDataEvent(UInt64 serverConnectionHandlerID, UInt16 clientID, IntPtr samples,
                                                         int sampleCount, int channels)
         {
             short[] managedSamples = new short[sampleCount];
             Marshal.Copy(samples, managedSamples, 0, sampleCount);
+
+            Handler.AddSample(serverConnectionHandlerID, clientID, managedSamples, channels);
         }
+
+        
     }
 }
