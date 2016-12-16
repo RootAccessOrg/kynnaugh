@@ -3,6 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,20 +49,56 @@ namespace kynnaugh
 
                         var id = kvp.Key;
 
-                        Task.Run(() => TranscribeSamples(samples));
+                        Task.Run(() => TranscribeSamplesAsync(samples, id.Channels));
                     }
                 }
             }
         }
 
-        public void TranscribeSamples(short[] samples)
+        public async void TranscribeSamplesAsync(short[] samples, int channels)
         {
+            byte[] sampleData = new byte[samples.Length * 2];
+            Buffer.BlockCopy(samples, 0, sampleData, 0, samples.Length * 2);
 
+            byte[] speechData = PcmToFlac.PcmToFlac.Convert(sampleData, channels);
+
+            SpeechTranscriber transcriber = new SpeechTranscriber();
+            string text = await transcriber.TranscribeSpeechAsync(speechData);
+
+            if (text != null)
+            {
+                // TODO: UTF-8-ify
+                TS3Functions.printMessageToCurrentTab(text);
+            }
         }
     }
 
     internal class SampleId : System.Tuple<UInt64, UInt16, int>
     {
+        public UInt64 ServerConnectionHandlerID
+        {
+            get
+            {
+                return this.Item1;
+            }
+        }
+
+        public UInt16 ClientID
+        {
+            get
+            {
+                return this.Item2;
+            }
+        }
+
+        public int Channels
+        {
+            get
+            {
+                return this.Item3;
+            }
+        }
+
         public SampleId(UInt64 serverConnectionHandlerID, UInt16 clientID, int channels) : base(serverConnectionHandlerID, clientID, channels) { }
     }
 
