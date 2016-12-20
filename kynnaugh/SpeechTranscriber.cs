@@ -19,6 +19,7 @@ namespace kynnaugh
 
         public async Task<string> TranscribeSpeechAsync(byte[] speechData)
         {
+            Console.WriteLine("Transcribing " + speechData.Length + " bytes of speechData");
             Channel channel = new Channel("speech.googleapis.com:443", await GoogleGrpcCredentials.GetApplicationDefaultAsync());
             SpeechClient client = new SpeechClient(channel);
             RecognitionConfig config = new RecognitionConfig
@@ -42,16 +43,21 @@ namespace kynnaugh
 
             SyncRecognizeResponse resp = await client.SyncRecognizeAsync(req);
 
+            Console.WriteLine("Got " + resp.Results.Count + " transcription results");
+
             if (resp.Results.Count > 0)
             {
                 SpeechRecognitionResult res = resp.Results.First();
+                Console.WriteLine("Got " + res.Alternatives.Count + " alternatives in the first result");
                 if (res.Alternatives.Count > 0)
                 {
                     SpeechRecognitionAlternative alt = res.Alternatives[0];
+                    Console.WriteLine("Got transcription \"" + alt + "\"");
                     return alt.Transcript;
                 }
             }
 
+            Console.WriteLine("No valid transcription results");
             return null;
         }
     }
