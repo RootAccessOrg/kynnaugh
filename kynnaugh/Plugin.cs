@@ -20,7 +20,7 @@ namespace kynnaugh
 
         static string PluginId;
 
-        static SampleHandler Handler = null;
+        static SampleHandler Handler = new SampleHandler();
 
         /*********************************** Required functions ************************************/
         /*
@@ -98,18 +98,33 @@ namespace kynnaugh
         [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static int ts3plugin_init()
         {
-            //Console.WriteLine("Kynnaugh init()");
-            Handler = new SampleHandler();
+            Console.WriteLine("Kynnaugh init()");
+
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
             return 0;
         }
-        
+
+        private static System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            var name = args.Name;
+
+            IntPtr bufSize = (IntPtr)1024;
+            var buf = Marshal.AllocHGlobal(bufSize);
+            Handler.TS3Functions.getConfigPath(buf, bufSize);
+            string configPath = StringUtils.StringFromNativeUtf8(buf);
+            Marshal.FreeHGlobal(buf);
+            
+            var asmDir = System.IO.Path.Combine(configPath, "plugins", "kynnaugh");
+            return System.Reflection.Assembly.LoadFrom(System.IO.Path.Combine(asmDir, new System.Reflection.AssemblyName(name).Name + ".dll"));
+        }
+
         /// <summary>
         /// Custom code called right before the plugin is unloaded
         /// </summary>
         [DllExport(CallingConvention = CallingConvention.Cdecl)]
         public static void ts3plugin_shutdown()
         {
-
+            AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
         }
         
         /// <summary>
@@ -163,6 +178,7 @@ namespace kynnaugh
             short[] managedSamples = new short[sampleCount];
             Marshal.Copy(samples, managedSamples, 0, sampleCount);
 
+            Console.WriteLine("Sample received");
             Handler.AddSample(serverConnectionHandlerID, clientID, managedSamples, channels);
         }
 
