@@ -18,7 +18,7 @@ namespace kynnaugh
 
         public SampleHandler()
         {
-            Timer timer = new Timer(state => CheckSamples(), null, Timeout.InfiniteTimeSpan, TimeSpan.FromMilliseconds(500));
+            Timer timer = new Timer(state => CheckSamples(), null, TimeSpan.Zero, TimeSpan.FromMilliseconds(500));
         }
 
         public void AddSample(UInt64 serverConnectionHandlerID, UInt16 clientID, short[] samples, int channels)
@@ -46,6 +46,7 @@ namespace kynnaugh
                     {
                         var samples = kvp.Value.Samples.ToArray();
                         kvp.Value.Samples.Clear();
+                        kvp.Value.LastUpdatedTime = DateTime.MaxValue;
 
                         var id = kvp.Key;
 
