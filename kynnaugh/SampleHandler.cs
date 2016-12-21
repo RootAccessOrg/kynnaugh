@@ -83,29 +83,11 @@ namespace kynnaugh
 
     internal class SampleId : System.Tuple<UInt64, UInt16, int>
     {
-        public UInt64 ServerConnectionHandlerID
-        {
-            get
-            {
-                return this.Item1;
-            }
-        }
+        public UInt64 ServerConnectionHandlerID => this.Item1;
 
-        public UInt16 ClientID
-        {
-            get
-            {
-                return this.Item2;
-            }
-        }
+        public UInt16 ClientID => this.Item2;
 
-        public int Channels
-        {
-            get
-            {
-                return this.Item3;
-            }
-        }
+        public int Channels => this.Item3;
 
         public SampleId(UInt64 serverConnectionHandlerID, UInt16 clientID, int channels) : base(serverConnectionHandlerID, clientID, channels) { }
     }
