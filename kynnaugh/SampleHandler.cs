@@ -50,7 +50,12 @@ namespace kynnaugh
 
                         var id = kvp.Key;
 
-                        Task.Run(() => TranscribeSamplesAsync(samples, id.Channels));
+
+                        Console.WriteLine("Transcribing sample " + id.ClientID);
+
+                        var task = Task.Run(() => TranscribeSamplesAsync(samples, id.Channels));
+
+                        task.Wait();
                     }
                 }
             }
@@ -61,7 +66,9 @@ namespace kynnaugh
             byte[] sampleData = new byte[samples.Length * 2];
             Buffer.BlockCopy(samples, 0, sampleData, 0, samples.Length * 2);
 
+            Console.WriteLine("Converting " + samples.Length + " samples to FLAC");
             byte[] speechData = PcmToFlac.PcmToFlac.Convert(sampleData, channels);
+            Console.WriteLine(speechData.Length + " bytes of FLAC received");
 
             SpeechTranscriber transcriber = new SpeechTranscriber();
             string text = await transcriber.TranscribeSpeechAsync(speechData);
