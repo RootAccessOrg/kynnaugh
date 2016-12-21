@@ -15,6 +15,7 @@ namespace kynnaugh
     {
         public SpeechTranscriber()
         {
+            Console.WriteLine("Creating transcriber");
         }
 
         public async Task<string> TranscribeSpeechAsync(byte[] speechData)
