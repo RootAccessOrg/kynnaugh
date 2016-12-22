@@ -16,9 +16,12 @@ namespace kynnaugh
 
         private ConcurrentDictionary<SampleId, SampleInfo> sampleStore = new ConcurrentDictionary<SampleId, SampleInfo>();
 
+        // must be field to prevent GC
+        private Timer timer;
+
         public SampleHandler()
         {
-            Timer timer = new Timer(state => CheckSamples(), null, TimeSpan.Zero, TimeSpan.FromMilliseconds(500));
+            timer = new Timer(state => CheckSamples(), null, TimeSpan.Zero, TimeSpan.FromMilliseconds(500));
         }
 
         public void AddSample(UInt64 serverConnectionHandlerID, UInt16 clientID, short[] samples, int channels)
