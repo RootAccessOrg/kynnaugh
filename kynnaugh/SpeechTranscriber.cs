@@ -21,7 +21,7 @@ namespace kynnaugh
         public async Task<string> TranscribeSpeechAsync(byte[] speechData)
         {
             Console.WriteLine("Transcribing " + speechData.Length + " bytes of speechData");
-            Channel channel = new Channel("speech.googleapis.com:443", await GoogleGrpcCredentials.GetApplicationDefaultAsync());
+            Channel channel = new Channel("speech.googleapis.com", await GoogleGrpcCredentials.GetApplicationDefaultAsync());
             SpeechClient client = new SpeechClient(channel);
             RecognitionConfig config = new RecognitionConfig
             {
