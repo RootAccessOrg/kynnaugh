@@ -101,6 +101,9 @@ namespace kynnaugh
             Console.WriteLine("Kynnaugh init()");
 
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             return 0;
         }
 
@@ -116,6 +119,13 @@ namespace kynnaugh
             
             var asmDir = System.IO.Path.Combine(configPath, "plugins", "kynnaugh");
             return System.Reflection.Assembly.LoadFrom(System.IO.Path.Combine(asmDir, new System.Reflection.AssemblyName(name).Name + ".dll"));
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine("Press any key to quit...");
+            Console.ReadKey(true);
         }
 
         /// <summary>
