@@ -45,6 +45,7 @@ namespace kynnaugh
             {
                 lock (kvp.Value)
                 {
+                    Console.WriteLine("Checking kvp set " + kvp.Value.LastUpdatedTime + " against threshold " + threshold);
                     if (threshold > kvp.Value.LastUpdatedTime)
                     {
                         var samples = kvp.Value.Samples.ToArray();
