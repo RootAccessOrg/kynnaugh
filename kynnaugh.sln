@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kynnaugh", "kynnaugh\kynnaugh.csproj", "{CDD3A3B7-5782-4DCD-ABAC-6E109A7C49B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcmToFlac", "PcmToFlac\PcmToFlac.csproj", "{97AFA03D-386E-4071-A816-05BF9702807E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcmToFlac.Test", "PcmToFlac.Test\PcmToFlac.Test.csproj", "{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSpeechApis", "GoogleSpeechApis\GoogleSpeechApis.csproj", "{D111D997-6149-47BC-A82F-C75535C14CF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,18 @@ Global
 		{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}.Release|x64.Build.0 = Release|Any CPU
 		{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}.Release|x86.ActiveCfg = Release|Any CPU
 		{01EDBCAE-2F0E-4778-8CB7-AB5C3B4AB551}.Release|x86.Build.0 = Release|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Debug|x64.Build.0 = Debug|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Debug|x86.Build.0 = Debug|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Release|x64.ActiveCfg = Release|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Release|x64.Build.0 = Release|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Release|x86.ActiveCfg = Release|Any CPU
+		{D111D997-6149-47BC-A82F-C75535C14CF1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
