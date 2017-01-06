@@ -1,7 +1,5 @@
 ﻿using CSCore;
-using CSCore.Codecs;
 using CSCore.Codecs.RAW;
-using CSCore.DSP;
 using FlacBox;
 using System;
 using System.Collections.Generic;
@@ -10,34 +8,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PcmToFlac
+namespace kynnaugh
 {
-    public class PcmToFlac
+    class AudioConverter
     {
-        public static byte[] Convert(byte[] input, int channels)
+        public byte[] Convert(byte[] input, int inSampleRate, int outSampleRate, int inBitRate, int outBitRate, int inChannels, int outChannels)
         {
             using (var dest = new MemoryStream())
             {
                 using (var resampledSource = new MemoryStream())
                 {
-                    using (var source = new RawDataReader(new MemoryStream(input, false), new WaveFormat(48000, 16, channels)))
+                    using (var s = new RawDataReader(new MemoryStream(input, false), new WaveFormat(inSampleRate, inBitRate, inChannels)))
                     {
+                        var source = outChannels == 1 ? s.ToMono() : s.ToStereo();
                         source
-                            .ToMono()
-                            .ChangeSampleRate(16000)
+                            .ChangeSampleRate(outSampleRate)
                             .ToSampleSource()
-                            .ToWaveSource(16)
+                            .ToWaveSource(outBitRate)
                             .WriteToWaveStream(resampledSource);
                     }
-                    
+
+
                     using (var encStream = new WaveOverFlacStream(dest, WaveOverFlacStreamMode.Encode, true))
                     {
                         var buf = resampledSource.ToArray();
                         encStream.Write(buf, 0, buf.Length);
                     }
-                    
-                    return dest.ToArray();
                 }
+
+                return dest.ToArray();
             }
         }
     }

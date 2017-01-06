@@ -71,7 +71,8 @@ namespace kynnaugh
             Buffer.BlockCopy(samples, 0, sampleData, 0, samples.Length * 2);
 
             Console.WriteLine("Converting " + samples.Length + " samples to FLAC");
-            byte[] speechData = PcmToFlac.PcmToFlac.Convert(sampleData, channels);
+            AudioConverter converter = new AudioConverter();
+            byte[] speechData = converter.Convert(sampleData, 48000, 16000, 16, 16, channels, 1);
             Console.WriteLine(speechData.Length + " bytes of FLAC received");
 
             SpeechTranscriber transcriber = new SpeechTranscriber();
