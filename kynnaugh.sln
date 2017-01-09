@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSpeechApis", "GoogleS
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoogleSpeechApisCore", "GoogleSpeechApisCore\GoogleSpeechApisCore.xproj", "{279DC4C3-332F-44B0-856D-02E62DAD9117}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FlacBoxCore", "FlacBoxCore\FlacBoxCore.xproj", "{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{279DC4C3-332F-44B0-856D-02E62DAD9117}.Release|x64.Build.0 = Release|Any CPU
 		{279DC4C3-332F-44B0-856D-02E62DAD9117}.Release|x86.ActiveCfg = Release|Any CPU
 		{279DC4C3-332F-44B0-856D-02E62DAD9117}.Release|x86.Build.0 = Release|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Debug|x64.Build.0 = Debug|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Debug|x86.Build.0 = Debug|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Release|x64.ActiveCfg = Release|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Release|x64.Build.0 = Release|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Release|x86.ActiveCfg = Release|Any CPU
+		{4A352DF1-BE30-4E6D-9E2D-3020EDBD8279}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
